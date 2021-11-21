@@ -7,7 +7,7 @@ plugins {
     `java-library`
 }
 
-group = "toxic.game"
+group = "com.github.miong"
 version = "1.0-SNAPSHOT"
 
 repositories {
