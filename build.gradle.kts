@@ -30,3 +30,11 @@ tasks.test {
 tasks.jar {
 
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
+}
