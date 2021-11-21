@@ -1,4 +1,4 @@
-package com.bubul.col.game.core.net.mqtt.messages
+package com.bubul.col.messages.ping
 
 
 import com.bubul.col.messages.MqttMessage

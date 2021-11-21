@@ -27,10 +27,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.jar {
-
-}
-
 publishing {
     publications {
         create<MavenPublication>("maven") {
