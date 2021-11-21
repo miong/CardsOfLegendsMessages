@@ -3,6 +3,7 @@ plugins {
     kotlin("kapt") version "1.5.31"
     kotlin("plugin.serialization") version "1.5.31"
     id("java")
+    `maven-publish`
     `java-library`
 }
 
