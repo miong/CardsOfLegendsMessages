@@ -40,7 +40,7 @@ class RegisterMsg(val source : String, val login : String, val mdpSalt : String)
     }
 
     companion object {
-        const val topic = "${MqttMessage.topic}/PingService/Login"
+        const val topic = "${MqttMessage.topic}/PingService/Register"
 
         fun deserialize(data : ByteArray) : LoginMsg {
             val payload = Json.decodeFromString<LoginMsgPayload>(String(data))
