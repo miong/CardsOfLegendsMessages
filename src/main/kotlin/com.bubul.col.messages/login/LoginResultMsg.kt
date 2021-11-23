@@ -12,7 +12,7 @@ enum class LoginResultItem {
 @Serializable
 data class LoginRestultMsgPayload(val target : String, val login : String, val resultItem : LoginResultItem)
 
-class LoginRestultMsg(val target : String, val login : String, val resultItem : LoginResultItem) : MqttMessage() {
+open class LoginRestultMsg(val target : String,val login : String,val resultItem : LoginResultItem) : MqttMessage() {
 
     override fun serialize(): ByteArray {
         val payload = Json.encodeToString(LoginRestultMsgPayload(target,login, resultItem))
@@ -25,6 +25,26 @@ class LoginRestultMsg(val target : String, val login : String, val resultItem : 
 
     companion object {
         const val topic = "${MqttMessage.topic}/PingService/LoginResult"
+
+        fun deserialize(data : ByteArray) : LoginRestultMsg {
+            val payload = Json.decodeFromString<LoginRestultMsgPayload>(String(data))
+            return LoginRestultMsg(payload.target,payload.login, payload.resultItem)
+        }
+    }
+}
+
+class RegisterRestulMsg(val target : String, val login : String, val resultItem : LoginResultItem) : MqttMessage() {
+    override fun serialize(): ByteArray {
+        val payload = Json.encodeToString(LoginRestultMsgPayload(target,login, resultItem))
+        return payload.toByteArray()
+    }
+
+    override fun getMqttTopic(): String {
+        return topic
+    }
+
+    companion object {
+        const val topic = "${MqttMessage.topic}/PingService/RegisterResult"
 
         fun deserialize(data : ByteArray) : LoginRestultMsg {
             val payload = Json.decodeFromString<LoginRestultMsgPayload>(String(data))
