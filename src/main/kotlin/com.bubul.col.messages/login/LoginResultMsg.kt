@@ -24,7 +24,7 @@ open class LoginRestultMsg(val target : String,val login : String,val resultItem
     }
 
     companion object {
-        const val topic = "${MqttMessage.topic}/PingService/LoginResult"
+        const val topic = "${MqttMessage.topic}/LoginService/LoginResult"
 
         fun deserialize(data : ByteArray) : LoginRestultMsg {
             val payload = Json.decodeFromString<LoginRestultMsgPayload>(String(data))
@@ -44,7 +44,7 @@ class RegisterRestulMsg(val target : String, val login : String, val resultItem 
     }
 
     companion object {
-        const val topic = "${MqttMessage.topic}/PingService/RegisterResult"
+        const val topic = "${MqttMessage.topic}/LoginService/RegisterResult"
 
         fun deserialize(data : ByteArray) : LoginRestultMsg {
             val payload = Json.decodeFromString<LoginRestultMsgPayload>(String(data))

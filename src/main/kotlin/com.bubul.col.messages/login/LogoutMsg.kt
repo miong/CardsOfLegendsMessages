@@ -19,7 +19,7 @@ class LogoutMsg(val source : String, val login : String) : MqttMessage() {
     }
 
     companion object {
-        const val topic = "${MqttMessage.topic}/PingService/Logout"
+        const val topic = "${MqttMessage.topic}/LoginService/Logout"
 
         fun deserialize(data : ByteArray) : LogoutMsg {
             val payload = Json.decodeFromString<LogoutMsgPayload>(String(data))
