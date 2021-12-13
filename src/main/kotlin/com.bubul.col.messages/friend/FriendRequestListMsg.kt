@@ -7,12 +7,12 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 @Serializable
-data class FriendRequestListMsgPayload(val sources : List<String>)
+data class FriendRequestListMsgPayload(val requests : List<String>)
 
-class FriendRequestListMsg(val sources : List<String>) : MqttMessage() {
+class FriendRequestListMsg(val requests : List<String>) : MqttMessage() {
 
     override fun serialize(): ByteArray {
-        val payload = Json.encodeToString(FriendRequestListMsgPayload(sources))
+        val payload = Json.encodeToString(FriendRequestListMsgPayload(requests))
         return payload.toByteArray()
     }
 
@@ -25,7 +25,7 @@ class FriendRequestListMsg(val sources : List<String>) : MqttMessage() {
 
         fun deserialize(data : ByteArray) : FriendRequestListMsg {
             val payload = Json.decodeFromString<FriendRequestListMsgPayload>(String(data))
-            return FriendRequestListMsg(payload.sources)
+            return FriendRequestListMsg(payload.requests)
         }
     }
 }
