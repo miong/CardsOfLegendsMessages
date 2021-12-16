@@ -5,12 +5,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 @Serializable
-data class LogoutMsgPayload(val source : String, val login : String)
+data class LogoutMsgPayload(val sourceEntity : String, val login : String)
 
-class LogoutMsg(val source : String, val login : String) : MqttMessage() {
+class LogoutMsg(val sourceEntity : String, val login : String) : MqttMessage() {
 
     override fun serialize(): ByteArray {
-        val payload = Json.encodeToString(LogoutMsgPayload(source,login))
+        val payload = Json.encodeToString(LogoutMsgPayload(sourceEntity,login))
         return payload.toByteArray()
     }
 
@@ -23,7 +23,7 @@ class LogoutMsg(val source : String, val login : String) : MqttMessage() {
 
         fun deserialize(data : ByteArray) : LogoutMsg {
             val payload = Json.decodeFromString<LogoutMsgPayload>(String(data))
-            return LogoutMsg(payload.source,payload.login)
+            return LogoutMsg(payload.sourceEntity,payload.login)
         }
     }
 }

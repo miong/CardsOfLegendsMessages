@@ -5,12 +5,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 @Serializable
-data class LoginMsgPayload(val source : String, val login : String, val mdpSalt : String)
+data class LoginMsgPayload(val sourceEntity : String, val login : String, val mdpSalt : String)
 
-class LoginMsg(val source : String, val login : String, val mdpSalt : String) : MqttMessage() {
+class LoginMsg(val sourceEntity : String, val login : String, val mdpSalt : String) : MqttMessage() {
 
     override fun serialize(): ByteArray {
-        val payload = Json.encodeToString(LoginMsgPayload(source,login, mdpSalt))
+        val payload = Json.encodeToString(LoginMsgPayload(sourceEntity,login, mdpSalt))
         return payload.toByteArray()
     }
 
@@ -23,15 +23,15 @@ class LoginMsg(val source : String, val login : String, val mdpSalt : String) : 
 
         fun deserialize(data : ByteArray) : LoginMsg {
             val payload = Json.decodeFromString<LoginMsgPayload>(String(data))
-            return LoginMsg(payload.source,payload.login, payload.mdpSalt)
+            return LoginMsg(payload.sourceEntity,payload.login, payload.mdpSalt)
         }
     }
 }
 
-class RegisterMsg(val source : String, val login : String, val mdpSalt : String) : MqttMessage() {
+class RegisterMsg(val sourceEntity : String, val login : String, val mdpSalt : String) : MqttMessage() {
 
     override fun serialize(): ByteArray {
-        val payload = Json.encodeToString(LoginMsgPayload(source,login, mdpSalt))
+        val payload = Json.encodeToString(LoginMsgPayload(sourceEntity,login, mdpSalt))
         return payload.toByteArray()
     }
 
@@ -42,9 +42,9 @@ class RegisterMsg(val source : String, val login : String, val mdpSalt : String)
     companion object {
         const val topic = "${MqttMessage.topic}/LoginService/Register"
 
-        fun deserialize(data : ByteArray) : LoginMsg {
+        fun deserialize(data : ByteArray) : RegisterMsg {
             val payload = Json.decodeFromString<LoginMsgPayload>(String(data))
-            return LoginMsg(payload.source,payload.login, payload.mdpSalt)
+            return RegisterMsg(payload.sourceEntity,payload.login, payload.mdpSalt)
         }
     }
 }

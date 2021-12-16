@@ -6,12 +6,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 @Serializable
-data class PongMsgPayload(val source : String, val target : String, val time : Long)
+data class PongMsgPayload(val sourceEntity : String, val targetEntity : String, val time : Long)
 
-class PongMsg(val source : String, val target : String, val time : Long) : MqttMessage() {
+class PongMsg(val sourceEntity : String, val targetEntity : String, val time : Long) : MqttMessage() {
 
     override fun serialize(): ByteArray {
-        val payload = Json.encodeToString(PongMsgPayload(source, target, time))
+        val payload = Json.encodeToString(PongMsgPayload(sourceEntity, targetEntity, time))
         return payload.toByteArray()
     }
 
@@ -23,7 +23,7 @@ class PongMsg(val source : String, val target : String, val time : Long) : MqttM
         const val topic = "${MqttMessage.topic}/PingService/Pong"
         fun deserialize(data : ByteArray) : PongMsg {
             val payload = Json.decodeFromString<PongMsgPayload>(String(data))
-            return PongMsg(payload.source, payload.target, payload.time)
+            return PongMsg(payload.sourceEntity, payload.targetEntity, payload.time)
         }
     }
 }
