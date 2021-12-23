@@ -25,7 +25,7 @@ class LobbyInviteConfirmationMsg(val sourceEntity : String, val targetEntity : S
     }
 
     companion object {
-        const val baseTopic = "$topic/LobbyService/Confirmation/"
+        const val baseTopic = "$topic/LobbyService/Response/"
 
         fun deserialize(data : ByteArray) : LobbyInviteConfirmationMsg {
             val payload = Json.decodeFromString<LobbyInviteConfirmationMsgPayload>(String(data))
