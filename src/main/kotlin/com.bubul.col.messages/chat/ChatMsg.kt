@@ -1,13 +1,14 @@
 package com.bubul.col.messages.chat
 
 import com.bubul.col.messages.MqttMessage
+import com.bubul.col.messages.MqttMessagePayload
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 @Serializable
-data class ChatMsgPayload(val source : String, val target : String, val content : String)
+data class ChatMsgPayload(val source : String, val target : String, val content : String) : MqttMessagePayload(System.currentTimeMillis())
 
 class ChatMsg(val source : String, val target : String, val content : String) : MqttMessage() {
     override fun serialize(): ByteArray {

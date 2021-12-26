@@ -2,6 +2,7 @@
 package com.bubul.col.messages.friend
 
 import com.bubul.col.messages.MqttMessage
+import com.bubul.col.messages.MqttMessagePayload
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -14,7 +15,7 @@ enum class FriendStatus {
 }
 
 @Serializable
-data class FriendStatusListMsgPayload(val target : String, val friends : Map<String, Pair<FriendStatus,String>>)
+data class FriendStatusListMsgPayload(val target : String, val friends : Map<String, Pair<FriendStatus,String>>) : MqttMessagePayload(System.currentTimeMillis())
 
 class FriendStatusListMsg(val target : String, val friends : Map<String, Pair<FriendStatus,String>>) : MqttMessage() {
 

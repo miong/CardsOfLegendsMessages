@@ -1,6 +1,7 @@
 package com.bubul.col.messages.friend
 
 import com.bubul.col.messages.MqttMessage
+import com.bubul.col.messages.MqttMessagePayload
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -8,7 +9,7 @@ import kotlinx.serialization.json.Json
 import javax.swing.text.html.parser.Entity
 
 @Serializable
-data class FriendStatusMsgPayload(val source : String, val status : FriendStatus, val sourceEntity: String)
+data class FriendStatusMsgPayload(val source : String, val status : FriendStatus, val sourceEntity: String) : MqttMessagePayload(System.currentTimeMillis())
 
 class FriendStatusMsg(val source : String, val status : FriendStatus, val sourceEntity: String) : MqttMessage() {
 

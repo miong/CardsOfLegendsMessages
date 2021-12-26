@@ -1,11 +1,12 @@
 package com.bubul.col.messages.lobby
 
 import com.bubul.col.messages.MqttMessage
+import com.bubul.col.messages.MqttMessagePayload
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 @Serializable
-data class LobbyInviteResponseMsgPayload(val sourceEntity : String, val targetEntity : String, val accepted : Boolean)
+data class LobbyInviteResponseMsgPayload(val sourceEntity : String, val targetEntity : String, val accepted : Boolean) : MqttMessagePayload(System.currentTimeMillis())
 
 class LobbyInviteResponseMsg(val sourceEntity : String, val targetEntity : String, val accepted : Boolean) : MqttMessage() {
 

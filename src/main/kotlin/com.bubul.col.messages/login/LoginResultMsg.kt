@@ -1,6 +1,7 @@
 package com.bubul.col.messages.login
 
 import com.bubul.col.messages.MqttMessage
+import com.bubul.col.messages.MqttMessagePayload
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
@@ -10,7 +11,7 @@ enum class LoginResultItem {
 }
 
 @Serializable
-data class LoginRestultMsgPayload(val targetEntity : String, val login : String, val resultItem : LoginResultItem)
+data class LoginRestultMsgPayload(val targetEntity : String, val login : String, val resultItem : LoginResultItem) : MqttMessagePayload(System.currentTimeMillis())
 
 open class LoginRestultMsg(val targetEntity : String,val login : String,val resultItem : LoginResultItem) : MqttMessage() {
 

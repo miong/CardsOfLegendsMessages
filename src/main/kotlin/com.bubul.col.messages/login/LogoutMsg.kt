@@ -1,11 +1,12 @@
 package com.bubul.col.messages.login
 
 import com.bubul.col.messages.MqttMessage
+import com.bubul.col.messages.MqttMessagePayload
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 @Serializable
-data class LogoutMsgPayload(val sourceEntity : String, val login : String)
+data class LogoutMsgPayload(val sourceEntity : String, val login : String) : MqttMessagePayload(System.currentTimeMillis())
 
 class LogoutMsg(val sourceEntity : String, val login : String) : MqttMessage() {
 

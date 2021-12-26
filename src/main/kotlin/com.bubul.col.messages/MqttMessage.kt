@@ -1,5 +1,10 @@
 package com.bubul.col.messages
 
+import kotlinx.serialization.Serializable
+
+@Serializable
+open class MqttMessagePayload(val time : Long)
+
 abstract class MqttMessage() {
     abstract fun serialize() : ByteArray
 
