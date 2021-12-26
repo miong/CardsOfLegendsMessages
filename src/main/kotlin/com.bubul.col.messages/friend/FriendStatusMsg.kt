@@ -8,12 +8,12 @@ import kotlinx.serialization.json.Json
 import javax.swing.text.html.parser.Entity
 
 @Serializable
-data class FriendStatusMsgPayload(val source : String, val target : String, val status : FriendStatus, val sourceEntity: String)
+data class FriendStatusMsgPayload(val source : String, val status : FriendStatus, val sourceEntity: String)
 
-class FriendStatusMsg(val source : String, val target : String, val status : FriendStatus, val sourceEntity: String) : MqttMessage() {
+class FriendStatusMsg(val source : String, val status : FriendStatus, val sourceEntity: String) : MqttMessage() {
 
     override fun serialize(): ByteArray {
-        val payload = Json.encodeToString(FriendStatusMsgPayload(source,target,status,sourceEntity))
+        val payload = Json.encodeToString(FriendStatusMsgPayload(source,status,sourceEntity))
         return payload.toByteArray()
     }
 
@@ -26,7 +26,7 @@ class FriendStatusMsg(val source : String, val target : String, val status : Fri
 
         fun deserialize(data : ByteArray) : FriendStatusMsg {
             val payload = Json.decodeFromString<FriendStatusMsgPayload>(String(data))
-            return FriendStatusMsg(payload.source,payload.target,payload.status,payload.sourceEntity)
+            return FriendStatusMsg(payload.source,payload.status,payload.sourceEntity)
         }
     }
 }
