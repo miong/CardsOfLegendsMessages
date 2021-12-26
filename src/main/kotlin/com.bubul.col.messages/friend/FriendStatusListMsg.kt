@@ -7,10 +7,16 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-@Serializable
-data class FriendStatusListMsgPayload(val target : String, val friends : Map<String, Pair<Boolean,String>>)
+enum class FriendStatus {
+    Offline,
+    Online,
+    Playing
+}
 
-class FriendStatusListMsg(val target : String, val friends : Map<String, Pair<Boolean,String>>) : MqttMessage() {
+@Serializable
+data class FriendStatusListMsgPayload(val target : String, val friends : Map<String, Pair<FriendStatus,String>>)
+
+class FriendStatusListMsg(val target : String, val friends : Map<String, Pair<FriendStatus,String>>) : MqttMessage() {
 
     override fun serialize(): ByteArray {
         val payload = Json.encodeToString(FriendStatusListMsgPayload(target, friends))
